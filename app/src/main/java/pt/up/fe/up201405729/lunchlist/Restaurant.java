@@ -1,5 +1,7 @@
 package pt.up.fe.up201405729.lunchlist;
 
+import android.support.annotation.NonNull;
+
 class Restaurant {
     private String name = "";
     private String address = "";
@@ -27,5 +29,10 @@ class Restaurant {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public @NonNull String toString() {
+        return name;
     }
 }

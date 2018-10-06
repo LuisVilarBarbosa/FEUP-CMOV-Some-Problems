@@ -8,4 +8,7 @@
     <string name="sit_down_string">Sit-down</string>
     <string name="delivery_string">Delivery</string>
     <string name="default_radio_button_string">RadioButton</string>
+    <string name="logo_description">Restaurant type logo</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
 </resources>
