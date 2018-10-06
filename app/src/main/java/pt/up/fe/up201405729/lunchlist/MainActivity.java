@@ -1,13 +1,16 @@
 package pt.up.fe.up201405729.lunchlist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -21,9 +24,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, TabLayout.BaseOnTabSelectedListener {
     private List<Restaurant> rests = new ArrayList<>();
     private RestaurantAdapter adapter;
+    private TabLayout.Tab listTab, detailsTab;
+    private View tab1, tab2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +57,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (typeRadioButton.getText().equals(restaurant.getType()))
                         typeRadioButton.toggle();
                 }
+                detailsTab.select();
             }
         });
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        listTab = tabs.newTab().setText("List");
+        listTab.setIcon(R.drawable.list);
+        tabs.addTab(listTab);
+        detailsTab = tabs.newTab().setText("Details");
+        detailsTab.setIcon(R.drawable.restaurant);
+        tabs.addTab(detailsTab);
+        tabs.addOnTabSelectedListener(this);
+        tab1 = listView;
+        tab2 = findViewById(R.id.restParams);
     }
 
     @Override
@@ -67,6 +84,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RadioButton typeRadioButton = findViewById(typeRadioGroup.getCheckedRadioButtonId());
         restaurant.setType(typeRadioButton.getText().toString());
         adapter.add(restaurant);
+        clearKeyboard(this);
+        listTab.select();
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        switch (tab.getPosition()) {
+            case 0:
+                tab1.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                tab2.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+        switch (tab.getPosition()) {
+            case 0:
+                tab1.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                tab2.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+    }
+
+    void clearKeyboard(Activity act) {
+        View view = act.findViewById(android.R.id.content);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null)
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     class RestaurantAdapter extends ArrayAdapter<Restaurant> {
@@ -80,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = getLayoutInflater();
-                row = inflater.inflate(R.layout.row, null); // get our custom layout
+                row = inflater.inflate(R.layout.row, parent, false); // get our custom layout
             }
             Restaurant r = rests.get(position);
             ((TextView) row.findViewById(R.id.title)).setText(r.getName()); // fill restaurant name
