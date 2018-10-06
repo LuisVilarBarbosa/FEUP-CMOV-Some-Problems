@@ -8,6 +8,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RestaurantAdapter adapter;
     private TabLayout.Tab listTab, detailsTab;
     private View tab1, tab2;
+    private Restaurant current = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (typeRadioButton.getText().equals(restaurant.getType()))
                         typeRadioButton.toggle();
                 }
+                EditText notesEditText = findViewById(R.id.notesEditText);
+                notesEditText.setText(restaurant.getNotes());
+                current = restaurant;
                 detailsTab.select();
             }
         });
@@ -83,7 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RadioGroup typeRadioGroup = findViewById(R.id.typeRadioGroup);
         RadioButton typeRadioButton = findViewById(typeRadioGroup.getCheckedRadioButtonId());
         restaurant.setType(typeRadioButton.getText().toString());
+        EditText notesEditText = findViewById(R.id.notesEditText);
+        restaurant.setNotes(notesEditText.getText().toString());
         adapter.add(restaurant);
+        current = restaurant;
         clearKeyboard(this);
         listTab.select();
     }
@@ -122,6 +133,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (imm != null)
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.main, menu);
+        return (super.onCreateOptionsMenu(menu));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.toast) {
+            String message="No restaurant selected";
+            if (current!=null)
+                message=current.getNotes();
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            return(true);
+        }
+        return(super.onOptionsItemSelected(item));
+    }
+
 
     class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 

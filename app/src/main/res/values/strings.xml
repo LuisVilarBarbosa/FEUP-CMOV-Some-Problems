@@ -11,4 +11,6 @@
     <string name="logo_description">Restaurant type logo</string>
     <string name="title">Title</string>
     <string name="address">Address</string>
+    <string name="notes_string">Notes: </string>
+    <string name="menu_item_toast">Raise Toast</string>
 </resources>
