@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         restaurant.setName(nameEditText.getText().toString());
         EditText addressEditText = findViewById(R.id.addressEditText);
         restaurant.setAddress(addressEditText.getText().toString());
+        RadioGroup typeRadioGroup = findViewById(R.id.typeRadioGroup);
+        RadioButton typeRadioButton = findViewById(typeRadioGroup.getCheckedRadioButtonId());
+        restaurant.setType(typeRadioButton.getText().toString());
         // 'restaurant' is lost.
     }
 }

@@ -3,4 +3,9 @@
     <string name="name_string">Name: </string>
     <string name="address_string">Address: </string>
     <string name="save_string">Save</string>
+    <string name="type_string">Type: </string>
+    <string name="take_out_string">Take-out</string>
+    <string name="sit_down_string">Sit-down</string>
+    <string name="delivery_string">Delivery</string>
+    <string name="default_radio_button_string">RadioButton</string>
 </resources>

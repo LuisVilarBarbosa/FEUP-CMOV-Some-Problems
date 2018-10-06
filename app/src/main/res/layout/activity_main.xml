@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:stretchColumns="1"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/nameTextView"
@@ -27,12 +26,11 @@
             android:imeOptions="actionNext"
             android:inputType="textPersonName" />
 
-    </LinearLayout>
+    </TableRow>
 
-    <LinearLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/addressTextView"
@@ -48,7 +46,45 @@
             android:ems="10"
             android:imeOptions="actionNext"
             android:inputType="textPostalAddress" />
-    </LinearLayout>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_string" />
+
+        <RadioGroup
+            android:id="@+id/typeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/typeRadioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/delivery_string" />
+
+            <RadioButton
+                android:id="@+id/typeRadioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sit_down_string" />
+
+            <RadioButton
+                android:id="@+id/typeRadioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/take_out_string" />
+
+        </RadioGroup>
+
+    </TableRow>
 
     <Button
         android:id="@+id/saveButton"
@@ -57,4 +93,4 @@
         android:onClick="onClick"
         android:text="@string/save_string" />
 
-</android.widget.LinearLayout>
+</android.widget.TableLayout>
