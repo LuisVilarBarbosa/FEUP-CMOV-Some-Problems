@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabs.addOnTabSelectedListener(this);
         tab1 = listView;
         tab2 = findViewById(R.id.restParams);
+
+        if (savedInstanceState != null)
+            onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -152,6 +155,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return(super.onOptionsItemSelected(item));
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(current.getClass().getName(), current);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        current = (Restaurant) savedInstanceState.getSerializable(current.getClass().getName());
+    }
 
     class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 

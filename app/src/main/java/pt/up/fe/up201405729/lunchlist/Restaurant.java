@@ -2,7 +2,9 @@ package pt.up.fe.up201405729.lunchlist;
 
 import android.support.annotation.NonNull;
 
-class Restaurant {
+import java.io.Serializable;
+
+class Restaurant implements Serializable {
     private String name = "";
     private String address = "";
     private String type = "";
