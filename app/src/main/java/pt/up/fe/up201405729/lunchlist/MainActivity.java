@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TabLayout.Tab listTab, detailsTab;
     private View tab1, tab2;
     private Restaurant current = null;
+    private String currentKeyOnSavedInstanceState = "current";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,13 +159,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(current.getClass().getName(), current);
+        outState.putSerializable(currentKeyOnSavedInstanceState, current);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        current = (Restaurant) savedInstanceState.getSerializable(current.getClass().getName());
+        current = (Restaurant) savedInstanceState.getSerializable(currentKeyOnSavedInstanceState);
     }
 
     class RestaurantAdapter extends ArrayAdapter<Restaurant> {
