@@ -7,4 +7,8 @@
         android:icon="@drawable/toast"
         android:showAsAction="ifRoom"
         android:title="@string/menu_item_toast" />
+
+    <item
+        android:id="@+id/add"
+        android:title="@string/add_restaurant_string" />
 </menu>

@@ -3,8 +3,9 @@
     package="pt.up.fe.up201405729.lunchlist">
 
     <application
+        android:name=".LunchApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/rest_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -15,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DetailsActivity"
+            android:label="Details"></activity>
     </application>
 
 </manifest>

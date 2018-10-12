@@ -43,7 +43,8 @@ class Restaurant implements Serializable {
     }
 
     @Override
-    public @NonNull String toString() {
+    public @NonNull
+    String toString() {
         return name;
     }
 }
