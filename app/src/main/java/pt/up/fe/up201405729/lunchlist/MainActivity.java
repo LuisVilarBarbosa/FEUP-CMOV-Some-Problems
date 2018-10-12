@@ -1,6 +1,5 @@
 package pt.up.fe.up201405729.lunchlist;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     public final static String ID_EXTRA = "RestaurantPosition";
     private LunchApp app;
@@ -39,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         ListView list = findViewById(R.id.listView);
         app = (LunchApp) getApplicationContext();
-        app.adapter = new RestaurantAdapter(this, android.R.layout.simple_list_item_1, app.restaurants);
+        app.adapter = new RestaurantAdapter();
         list.setAdapter(app.adapter);
         list.setEmptyView(findViewById(R.id.empty_list));
         list.setOnItemClickListener(this);
@@ -76,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
-        public RestaurantAdapter(Context context, int resourceId, List<Restaurant> objects) {
-            super(context, resourceId, objects); // the Activity, row layout, and array of values
+        public RestaurantAdapter() {
+            super(MainActivity.this, R.layout.row, app.restaurants); // the Activity, row layout, and array of values
         }
 
         @Override
