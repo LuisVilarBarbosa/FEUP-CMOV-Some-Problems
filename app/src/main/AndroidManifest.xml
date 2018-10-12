@@ -3,7 +3,6 @@
     package="pt.up.fe.up201405729.lunchlist">
 
     <application
-        android:name=".LunchApp"
         android:allowBackup="true"
         android:icon="@drawable/rest_icon"
         android:label="@string/app_name"
